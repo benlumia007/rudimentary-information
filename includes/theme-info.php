@@ -142,7 +142,7 @@ class Rudimentary_Information_Themes {
                     for a theme information json format.
                     ============================================================================
                     */
-                    $theme_info = Rudimentary_Information_Themes::get_remote_themeinfo($url, $slug);
+                    $theme_info = Rudimentary_Information_Themes::get_remote_theme_info($url, $slug);
                     return $theme_info;
                 }
             }
@@ -157,7 +157,7 @@ class Rudimentary_Information_Themes {
     about a specific theme by slug.
     ============================================================================================
     */
-    public static function get_remote_themeinfo($url = '', $slug) {
+    public static function get_remote_theme_info($url = '', $slug) {
 		if ($url && $slug) {
             /*
             ====================================================================================
