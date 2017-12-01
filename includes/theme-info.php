@@ -18,7 +18,7 @@ wordpress.org themes API. It caches calls on a theme by bases.
 Table of Content
 ================================================================================================
  1.0 - Forbidden Access
- 2.0 - Rudimentary Information Class Setup
+ 2.0 - Rudimentary Information Themes Class Setup
 ================================================================================================
 */
 
@@ -36,13 +36,13 @@ if (!defined('ABSPATH')) {
  2.0 - Rudimentary Information Class Setup
 ================================================================================================
 */
-class Rudimentary_Information {
+class Rudimentary_Information_Themes {
     /*
     ============================================================================================
     $transient_base is used to hold data as a transient for a short time.
     ============================================================================================
     */
-    public static $transient_base = 'Rudimentary_Information_';
+    public static $transient_base = 'Rudimentary_Information_Themes_';
     
     /*
     ============================================================================================
@@ -58,7 +58,7 @@ class Rudimentary_Information {
     */
     public static function init() {
         if (null === self::$instance) {
-            self::$instance = new Rudimentary_Information;
+            self::$instance = new Rudimentary_Information_Themes;
         }
         return self::$instance;
     }
@@ -103,7 +103,7 @@ class Rudimentary_Information {
                 Get transient name the base and slug.
                 ================================================================================
                 */
-                $theme_transient = Rudimentary_Information::$transient_base . $slug;
+                $theme_transient = Rudimentary_Information_Themes::$transient_base . $slug;
                 
                 /*
                 ================================================================================
@@ -142,7 +142,7 @@ class Rudimentary_Information {
                     for a theme information json format.
                     ============================================================================
                     */
-                    $theme_info = Rudimentary_Information::get_remote_themeinfo($url, $slug);
+                    $theme_info = Rudimentary_Information_Themes::get_remote_themeinfo($url, $slug);
                     return $theme_info;
                 }
             }
@@ -198,7 +198,7 @@ class Rudimentary_Information {
                     Save this information as a transient for 24 hours.
                     ============================================================================
                     */
-					$saved = set_transient(Rudimentary_Information::$transient_base . $slug, $theme_info, 60 * 60 * 24);
+					$saved = set_transient(Rudimentary_Information_Themes::$transient_base . $slug, $theme_info, 60 * 60 * 24);
 
                     /*
                     ============================================================================
