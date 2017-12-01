@@ -70,17 +70,26 @@ To use this plugin simply create a new post or page, and add the following short
 [plugin-info slug='plugin-slug' field='name'] for plugins
 
 == Changelog ==
+= 0.0.3 =
+*Release Date - November 30, 2017*
+
+* Bump Version to 0.0.3 for readme.txt and rudimentary-information.php
+* Changed shortcode from theme-info to plugin-info 
+
 = 0.0.2 = 
-- Removed Whitespace (readme.txt)
-- Replace Classes for either Themes or Plugins
-- Add plugin-info.php
+*Release Date - November 30, 2017*
+
+* Removed Whitespace (readme.txt)
+* Replace Classes for either Themes or Plugins
+* Add plugin-info.php
 
 = 0.0.1 =
-Initial Release
+*Release Date - November 30, 2017*
+
+* Initial Release
 
 == Upgrade Notice ==
-= 0.0.2 =
-Update to Support Plugins API
-
 = 0.0.1 =
-Initial Release
+*Release Date - November 30, 2017*
+
+* Initial Release
