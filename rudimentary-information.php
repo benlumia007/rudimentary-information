@@ -9,7 +9,7 @@ License: GNU General Public License v2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Domain Path: /languages
 Text Domain: rudimentary-information
-Version: 0.0.1
+Version: 0.0.2
 
 Rudimentary Information is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by the Free 
@@ -48,11 +48,13 @@ if (!defined('ABSPATH')) {
  2.0 - Required Files
 ================================================================================================
 */
-include(plugin_dir_path(__FILE__) . 'includes/theme-info.php');
+require_once(plugin_dir_path(__FILE__) . 'includes/theme-info.php');
+require_once(plugin_dir_path(__FILE__) . '/includes/plugin-info.php');
 
 /*
 ================================================================================================
  3.0 - Initialization
 ================================================================================================
 */
-$theme_info = Rudimentary_Information::init();
+$theme_info = Rudimentary_Information_Themes::init();
+$plugin_info = Rudimentary_Information_Plugins::init();
