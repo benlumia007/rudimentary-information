@@ -4,7 +4,7 @@ Donate link: https://www.benjlu.com
 Tags: api
 Requires at least: 4.8.3
 Tested up to: 4.9
-Stable tag: 0.0.2
+Stable tag: 0.0.3
 Requires PHP: 7.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -35,7 +35,7 @@ The following fields that are currently supported are as follow:
 = Working with Plugins =
 To display a specific plugin, please use the following shortcode
 
-[theme-info slug='plugin-slug' field='version']
+[plugin-info slug='plugin-slug' field='version']
 
 The slug is the name of the plugin that you want to display. The field is an array of choices that you can use to display a piece of information such as version or last_updated information.
 
