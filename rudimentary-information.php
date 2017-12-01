@@ -9,7 +9,7 @@ License: GNU General Public License v2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Domain Path: /languages
 Text Domain: rudimentary-information
-Version: 0.0.2
+Version: 0.0.3
 
 Rudimentary Information is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by the Free 
