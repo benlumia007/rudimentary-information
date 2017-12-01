@@ -71,7 +71,7 @@ class Rudimentary_Information_Plugins {
     private function __construct() {
         /*
         ========================================================================================
-        Adds shortcode for getting individual pieces of theme info.
+        Adds shortcode for getting individual pieces of plugin info.
         ========================================================================================
         */
         add_shortcode('plugin-info', array($this, 'get_with_shortcode'));
@@ -79,11 +79,11 @@ class Rudimentary_Information_Plugins {
     
     /*
     ============================================================================================
-    Function used to either retrieve some theme information from the WordPress.org themes API or
+    Function used to either retrieve some plugin information from the WordPress.org plugins API or
     return a transient with the data if it already exists.
     ============================================================================================
     */
-    public static function get_theme_info($slug = '') {
+    public static function get_plugin_info($slug = '') {
         /*
         ========================================================================================
         To operate we need to have a slug that isn't an empty string.
@@ -96,25 +96,25 @@ class Rudimentary_Information_Plugins {
                 If we have a slug then form our url.
                 ================================================================================
                 */
-                $url = esc_url_raw('https://api.wordpress.org/themes/info/1.1/?action=theme_information&request[slug]=' . esc_attr($slug));
+                $url = esc_url_raw('https://api.wordpress.org/plugins/info/1.1/?action=plugin_information&request[slug]=' . esc_attr($slug));
                 
                 /*
                 ================================================================================
                 Get transient name the base and slug.
                 ================================================================================
                 */
-                $theme_transient = Rudimentary_Information_Plugins::$transient_base . $slug;
+                $plugin_transient = Rudimentary_Information_Plugins::$transient_base . $slug;
                 
                 /*
                 ================================================================================
                 Get the expiery time on the transient.
                 ================================================================================
                 */
-                $data_timeout = get_option('_transient_timeout_' . $theme_transient);
+                $data_timeout = get_option('_transient_timeout_' . $plugin_transient);
                 
                 /*
                 ================================================================================
-                data_timeout will exist if a transient data exists for this theme slug. Also it
+                data_timeout will exist if a transient data exists for this plugin slug. Also it
                 will test if it is expired.
                 ================================================================================
                 */
@@ -124,7 +124,7 @@ class Rudimentary_Information_Plugins {
                     Get the Transient data as it is saved and not expired.
                     ============================================================================
                     */
-                    $plugin_info = get_transient($theme_transient);
+                    $plugin_info = get_transient($plugin_transient);
                     
                     /*
                     ============================================================================
@@ -137,12 +137,12 @@ class Rudimentary_Information_Plugins {
                 } else {
                     /*
                     ============================================================================
-                    If we have a valid url and an existing transient data for the theme information
+                    If we have a valid url and an existing transient data for the plugin information
                     and doesn't exist, or is it expired, then we will use URL to get a GET request
-                    for a theme information json format.
+                    for a plugin information json format.
                     ============================================================================
                     */
-                    $plugin_info = Rudimentary_Information_Plugins::get_remote_themeinfo($url, $slug);
+                    $plugin_info = Rudimentary_Information_Plugins::get_remote_plugin_info($url, $slug);
                     return $plugin_info;
                 }
             }
@@ -153,11 +153,11 @@ class Rudimentary_Information_Plugins {
     
     /*
     ============================================================================================
-    Use wp_remote_get to make a request to WordPress.org Theme's API and asks for information
-    about a specific theme by slug.
+    Use wp_remote_get to make a request to WordPress.org plugin's API and asks for information
+    about a specific plugin by slug.
     ============================================================================================
     */
-    public static function get_remote_themeinfo($url = '', $slug) {
+    public static function get_remote_plugin_info($url = '', $slug) {
 		if ($url && $slug) {
             /*
             ====================================================================================
@@ -181,7 +181,7 @@ class Rudimentary_Information_Plugins {
 				if (200 === $response['response']['code']) {
                     /*
                     ============================================================================
-                    This should be a json object with theme information.
+                    This should be a json object with plugin information.
                     ============================================================================
                     */
 					$plugin_info = $response['body'];
@@ -214,7 +214,7 @@ class Rudimentary_Information_Plugins {
     /*
     ============================================================================================
     Function to generate some markup for a shortcode to output various pieces of information
-    about a theme from json object.
+    about a plugin from json object.
     ============================================================================================
     */
     public function get_with_shortcode($atts = array()) {
@@ -226,12 +226,12 @@ class Rudimentary_Information_Plugins {
             
             /*
             ====================================================================================
-            Sinc we have a slug then we try getting the theme information. The call here should 
-            return a json object containing the theme information. It will either be pulled from
+            Sinc we have a slug then we try getting the plugin information. The call here should 
+            return a json object containing the plugin information. It will either be pulled from
             a transient data or a get request to pull the information needed from the remote API.
             ====================================================================================
             */
-            $plugin_info = $this->get_theme_info($atts['slug']);
+            $plugin_info = $this->get_plugin_info($atts['slug']);
             
             /*
             ====================================================================================
