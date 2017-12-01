@@ -79,5 +79,8 @@ To use this plugin simply create a new post or page, and add the following short
 Initial Release
 
 == Upgrade Notice ==
+= 0.0.2 =
+Update to Support Plugins API
+
 = 0.0.1 =
 Initial Release
