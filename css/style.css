@@ -1,0 +1,24 @@
+.rudimentary-information table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.rudimentary-information tr:nth-of-type(odd) {
+    background: #eeeeee;
+}
+
+.rudimentary-information th {
+    background: #333333;
+    color: #ffffff;
+    font-weight: 700;
+}
+
+.rudimentary-information th, 
+.rudimentary-information td {
+    border: 0.063em solid #cccccc;
+    text-align: left;
+    padding: 0.438em;
+    width: 50%;
+}
+
+

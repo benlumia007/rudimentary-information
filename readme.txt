@@ -4,7 +4,7 @@ Donate link: https://www.benjlu.com
 Tags: api
 Requires at least: 4.8.3
 Tested up to: 4.9
-Stable tag: 0.0.4
+Stable tag: 0.0.5
 Requires PHP: 7.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -70,6 +70,13 @@ To use this plugin simply create a new post or page, and add the following short
 [plugin-info slug='plugin-slug' field='name'] for plugins
 
 == Changelog ==
+= 0.0.5 =
+*Release Date - December 16, 2017*
+
+* Add Widget Support for Themes
+* Add Metabox to suppor Widget (JetPack Portfolio Only)
+* Bump Version to 0.0.5
+
 = 0.0.4 =
 *Release Date - December 1, 2017*
 
