@@ -71,9 +71,12 @@ To use this plugin simply create a new post or page, and add the following short
 
 [plugin-info slug='plugin-slug' field='name'] for plugins
 
+= How to use Meta Box and Widget =
+In this new feature, you can use Meta Box and Widget to display your information. The easiest way to do this is to create or modify a page that is under Portfolio, you will then see two new Meta Box for Theme Slug and Plugin Slug, use one or other depending on the current page that you are working on. Once this slug is set, then you can add a widget to the portfolio sidebar to display information automatically. This will only display last updated, version, and how many times the theme or plugin has been downloaded. 
+
 == Changelog ==
 = 0.0.5 =
-*Release Date - December 16, 2017*
+*Release Date - December 17, 2017*
 
 * Add Widget Support for Themes and Plugins
 * Add Meta Box for Themes and Plugins to support Widget (JetPack Portfolio Only)
