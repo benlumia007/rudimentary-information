@@ -1,7 +1,7 @@
 <?php
 /*
 ================================================================================================
-Rudimentary Information - theme-widget.php
+Rudimentary Information - plugin-widget.php
 ================================================================================================
 This holds the main class that can be used to get information about a theme that comes from the
 wordpress.org themes API. It caches calls on a theme by bases.
@@ -36,7 +36,7 @@ if (!defined('ABSPATH')) {
  2.0 - Rudimentary Information Themes Widget Class Setup
 ================================================================================================
 */
-class Rudimentary_Information_Themes_Widget extends WP_Widget {
+class Rudimentary_Information_Plugins_Widget extends WP_Widget {
     /*
     ============================================================================================
      Constructor function that is used to add its widget form. This widget is used to ouput theme
@@ -45,10 +45,10 @@ class Rudimentary_Information_Themes_Widget extends WP_Widget {
     */
     public function __construct() {
         $widget_options = array(
-            'classname' => 'theme_widget',
-            'description' => __('A widget to output theme information if a slug is set through the metabox.', 'rudimentary-information'),
+            'classname' => 'plugin_widget',
+            'description' => __('A widget to output plugin information if a slug is set through the metabox.', 'rudimentary-information'),
         );
-        parent::__construct('theme_widget', 'Theme Info', $widget_options);
+        parent::__construct('plugin_widget', 'Plugin Info', $widget_options);
     }
     
     /*
@@ -73,17 +73,17 @@ class Rudimentary_Information_Themes_Widget extends WP_Widget {
     any data for use in that markup. Echos the $html once it is generated. Returns false if it fails.
     ============================================================================================
     */
-	public function widget( $args, $instance ) {
+	public function widget($args, $instance) {
         global $post;
-        $slug = get_post_meta($post->ID, '_theme_slug', true);
+        $slug = get_post_meta($post->ID, '_plugin_slug', true);
         
         if (!$slug) {
             return false;
         }
         
-        $theme_info = Rudimentary_Information_Themes::get_theme_info($slug);
+        $plugin_info = Rudimentary_Information_Plugins::get_plugin_info($slug);
         
-        if (is_object($theme_info)) {
+        if (is_object($plugin_info)) {
             $fields = array(
 				'last_updated'  => esc_html__( 'Last Updated:', 'rudimentary-information'),
 				'version'       => esc_html__( 'Version:', 'rudimentary-information'),
@@ -91,7 +91,7 @@ class Rudimentary_Information_Themes_Widget extends WP_Widget {
             );
         }
         
-        $fields = apply_filters('theme_slug_field', $fields);
+        $fields = apply_filters('plugin_slug_field', $fields);
         
         ob_start();
         echo $args['before_widget'] . $args['before_title'] . apply_filters('widget_title', $instance['title']) . $args['after_title'];
@@ -106,28 +106,28 @@ class Rudimentary_Information_Themes_Widget extends WP_Widget {
                             <?php
                                 switch ($key) {
 									case 'preview_url':
-										$text = $theme_info->name;
+										$text = $plugin_info->name;
 										break;
 									case 'homepage':
-										$text = $theme_info->name;
+										$text = $plugin_info->name;
 										break;
 									case 'download_link':
-										$text = $theme_info->name;
+										$text = $plugin_info->name;
 										break;
 									default:
-										$text = $theme_info->name;
+										$text = $plugin_info->name;
                                 } ?>
-                                <td><a href="<?php echo esc_url($theme_info->$key ); ?>"><?php esc_html_e(apply_filters('theme_slug_link_text', $text, $theme_info, $key)); ?></a></td>
+                                <td><a href="<?php echo esc_url($plugin_info->$key ); ?>"><?php esc_html_e(apply_filters('plugin_slug_link_text', $text, $plugin_info, $key)); ?></a></td>
                         <?php } else if ('downloaded' === $key) {
-                                $downloaded = absint($theme_info->downloaded);
+                                $downloaded = absint($plugin_info->downloaded);
                                 $downloaded_format = number_format($downloaded); ?>
                                 <td><?php echo esc_html($downloaded_format); ?></td> 
                         <?php } else if ('last_updated' === $key) {
-                                $time = strtotime($theme_info->last_updated);
+                                $time = strtotime($plugin_info->last_updated);
                                 $format_date = date(get_option('date_format'), $time); ?>
                                 <td><?php echo esc_html($format_date); ?></td> 
                         <?php } else { ?>
-                            <td><?php echo esc_html( $theme_info->$key ); ?></td>
+                            <td><?php echo esc_html( $plugin_info->$key ); ?></td>
                         <?php } ?>
                     </tr>
                 <?php } ?>

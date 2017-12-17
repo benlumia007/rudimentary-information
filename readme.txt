@@ -73,8 +73,8 @@ To use this plugin simply create a new post or page, and add the following short
 = 0.0.5 =
 *Release Date - December 16, 2017*
 
-* Add Widget Support for Themes
-* Add Metabox to suppor Widget (JetPack Portfolio Only)
+* Add Widget Support for Themes and Plugins
+* Add Meta Box for Themes and Plugins to support Widget (JetPack Portfolio Only)
 * Bump Version to 0.0.5
 
 = 0.0.4 =

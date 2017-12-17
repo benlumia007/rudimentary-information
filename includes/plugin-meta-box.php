@@ -1,7 +1,7 @@
 <?php
 /*
 ================================================================================================
-Rudimentary Information - theme-metabox.php
+Rudimentary Information - plugin-meta-box.php
 ================================================================================================
 This holds the main class that can be used to get information about a theme that comes from the
 wordpress.org themes API. It caches calls on a theme by bases.
@@ -36,74 +36,70 @@ if (!defined('ABSPATH')) {
  2.0 - Theme Info Metabox
 ================================================================================================
 */
-class Rudimentary_Information_Themes_Metabox {
+class Rudimentary_Information_Plugins_Meta_Box {
     public static $instance = null;
     
     public static function init() {
         if (null === self::$instance) {
-            self::$instance = new Rudimentary_Information_Themes_Metabox;
+            self::$instance = new Rudimentary_Information_Plugins_Meta_Box;
         }
         return self::$instance;
     }
     
     private function __construct() {
-        add_action('add_meta_boxes', array($this, 'add_theme_slug_metabox'));
-        add_action('save_post', array($this, 'save_theme_slug_metabox'));
+        add_action('add_meta_boxes', array($this, 'add_plugin_slug_meta_box'));
+        add_action('save_post', array($this, 'save_plugin_slug_meta_box'));
     }
     
-    public function add_theme_slug_metabox($post_type) {
+    public function add_plugin_slug_meta_box($post_type) {
         $post_types = array('jetpack-portfolio');
-        $post_types = apply_filters('filter_riti_metabox_post_type', $post_types);
+        $post_types = apply_filters('plugin_slug_meta_box_post_type', $post_types);
         
         if (in_array($post_type, $post_types, true)) {
             add_meta_box(
-                'riti_theme_slug_metabox', __('Theme Slug', 'riti_theme_slug_metabox_nonce'), array($this, 'render_theme_slug_metabox_content'), $post_type, 'side', 'high'
+                'plugin_slug_meta_box', esc_html__('Plugin Slug', 'rudimentary-information', 'plugin_slug_meta_box_nonce'), array($this, 'plugin_slug_meta_box_content'), $post_type, 'side', 'high'
             );
         }
     }
     
-    public function save_theme_slug_metabox($post_id) {
-		if ( ! isset( $_POST['riti_theme_slug_metabox_nonce'] ) ) {
+    public function save_plugin_slug_meta_box($post_id) {
+		if (!isset($_POST['plugin_slug_meta_box_nonce'])) {
 			return $post_id;
 		}
         
-        $nonce = $_POST['riti_theme_slug_metabox_nonce'];
-		// Verify that the nonce is valid.
-		if ( ! wp_verify_nonce( $nonce, 'riti_theme_slug_metabox_inner_nonce' ) ) {
+        $nonce = $_POST['plugin_slug_meta_box_nonce'];
+		if (!wp_verify_nonce($nonce, 'plugin_slug_meta_box_inner_nonce')) {
 			return $post_id;
 		}
         
-		if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
+		if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) {
 			return $post_id;
 		}
         
-		if ( 'page' == $_POST['post_type'] ) {
-			if ( ! current_user_can( 'edit_page', $post_id ) ) {
+		if ('page' == $_POST['post_type']) {
+			if (!current_user_can('edit_page', $post_id)) {
 				return $post_id;
 			}
 		} else {
-			if ( ! current_user_can( 'edit_post', $post_id ) ) {
+			if (!current_user_can('edit_post', $post_id)) {
 				return $post_id;
 			}
 		}
         
-		$data_slug = sanitize_text_field( $_POST['riti_slug_field'] );
-		// Update the meta field.
-		update_post_meta( $post_id, '_riti_theme_slug', $data_slug );
+		$data_slug = sanitize_text_field(
+            $_POST['plugin_slug_field']);
+		update_post_meta($post_id, '_plugin_slug', $data_slug);
     }
     
-	public function render_theme_slug_metabox_content( $post ) {
-		// Add an nonce field so we can check for it later.
-		wp_nonce_field( 'riti_theme_slug_metabox_inner_nonce', 'riti_theme_slug_metabox_nonce' );
-		// Use get_post_meta to retrieve an existing value from the database.
-		$value = get_post_meta( $post->ID, '_riti_theme_slug', true );
-		// Display the form, using the current value.
+	public function plugin_slug_meta_box_content($post) {
+		wp_nonce_field('plugin_slug_meta_box_inner_nonce', 'plugin_slug_meta_box_nonce');
+		$slug = get_post_meta($post->ID, '_plugin_slug', true);
 		?>
-		<label for="riti_slug_field">
-			<?php echo esc_html( 'Please enter a theme slug to be attached to the Jetpack Portfolio CPT.', 'rudimentary-information' ); ?>
+		<label for="plugin_slug_field">
+			<?php esc_html_e('Please enter a plugin slug to be attach to the Jetpack Portfolio Custom Post Type.', 'rudimentary-information'); ?>
 		</label>
         <p>
-		<input type="text" id="riti_slug_field" name="riti_slug_field" value="<?php echo esc_attr( $value ); ?>" size="25" />
+		<input class="widefat" type="text" id="plugin_slug_field" name="plugin_slug_field" value="<?php echo esc_attr($slug); ?>" />
         </p>
 		<?php
 	}

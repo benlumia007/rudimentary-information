@@ -31,7 +31,8 @@ Table of Content
  1.0 - Forbidden Access
  2.0 - Required Files
  3.0 - Initialization
- 4.0 - Theme Info Widget
+ 4.0 - Theme Info Widget and Plugin Info Widget
+ 5.0 - Enqueue Styles
 ================================================================================================
 */
 
@@ -51,7 +52,8 @@ if (!defined('ABSPATH')) {
 */
 require_once(plugin_dir_path(__FILE__) . 'includes/theme-info.php');
 require_once(plugin_dir_path(__FILE__) . 'includes/plugin-info.php');
-require_once(plugin_dir_path(__FILE__) . 'includes/theme-metabox.php');
+require_once(plugin_dir_path(__FILE__) . 'includes/theme-meta-box.php');
+require_once(plugin_dir_path(__FILE__) . 'includes/plugin-meta-box.php');
 
 /*
 ================================================================================================
@@ -61,8 +63,10 @@ require_once(plugin_dir_path(__FILE__) . 'includes/theme-metabox.php');
 $theme_info = Rudimentary_Information_Themes::init();
 $plugin_info = Rudimentary_Information_Plugins::init();
 
-add_action( 'load-post.php',     'Rudimentary_Information_Themes_Metabox::init' ); // adds a metabox and save action on editor screen for editing posts.
-add_action( 'load-post-new.php', 'Rudimentary_Information_Themes_Metabox::init' ); // adds a metabox and save action on editor for new posts.
+add_action('load-post.php', 'Rudimentary_Information_Themes_Meta_Box::init');
+add_action('load-post-new.php', 'Rudimentary_Information_Themes_Meta_Box::init');
+add_action('load-post.php', 'Rudimentary_Information_Plugins_Meta_Box::init');
+add_action('load-post-new.php', 'Rudimentary_Information_Plugins_Meta_Box::init');
 
 /*
 ================================================================================================
@@ -78,6 +82,20 @@ if ($theme_info instanceof Rudimentary_Information_Themes) {
     add_action('widgets_init', 'rudimentary_information_theme_info_widget');
 }
 
+if ($plugin_info instanceof Rudimentary_Information_Plugins) {
+    require_once(plugin_dir_path(__FILE__) . 'widgets/plugin-widget.php');
+    
+    function rudimentary_information_plugin_info_widget() {
+        register_widget('Rudimentary_Information_Plugins_Widget');
+    }
+    add_action('widgets_init', 'rudimentary_information_plugin_info_widget');
+}
+
+/*
+================================================================================================
+ 5.0 - Enqueue Styles
+================================================================================================
+*/
 function rudimentary_information_enqueue_styles() {
     wp_enqueue_style('rudimentary-information-style', plugin_dir_url(__FILE__) . 'css/style.css');
 }
