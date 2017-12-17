@@ -381,7 +381,7 @@ class Rudimentary_Information_Themes {
     Validate a field key string against the array of valid keys.
     ============================================================================================
     */
-	private function validate_field_id( $field ) {
+	private function validate_field_id($field) {
         /*
         ========================================================================================
         If the key is in the valid keys array then it is valid, otherwise it is invalid and should

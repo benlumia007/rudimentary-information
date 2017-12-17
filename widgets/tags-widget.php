@@ -1,7 +1,7 @@
 <?php
 /*
 ================================================================================================
-Rudimentary Information - theme-widget.php
+Rudimentary Information - tags-widget.php
 ================================================================================================
 This holds the main class that can be used to get information about a theme that comes from the
 wordpress.org themes API. It caches calls on a theme by bases.
@@ -36,7 +36,7 @@ if (!defined('ABSPATH')) {
  2.0 - Rudimentary Information Themes Widget Class Setup
 ================================================================================================
 */
-class Rudimentary_Information_Themes_Widget extends WP_Widget {
+class Rudimentary_Information_Themes_Tags_Widget extends WP_Widget {
     /*
     ============================================================================================
      Constructor function that is used to add its widget form. This widget is used to ouput theme
@@ -45,10 +45,10 @@ class Rudimentary_Information_Themes_Widget extends WP_Widget {
     */
     public function __construct() {
         $widget_options = array(
-            'classname' => 'theme_widget',
-            'description' => __('A widget to output theme information if a slug is set through the meta box.', 'rudimentary-information'),
+            'classname' => 'tag_widget',
+            'description' => __('A widget to output theme tags if a slug is set through the meta box.', 'rudimentary-information'),
         );
-        parent::__construct('theme_widget', 'Theme Info', $widget_options);
+        parent::__construct('tag_widget', 'Theme Tags', $widget_options);
     }
     
     /*
@@ -83,61 +83,22 @@ class Rudimentary_Information_Themes_Widget extends WP_Widget {
         
         $theme_info = Rudimentary_Information_Themes::get_theme_info($slug);
         
-        if (is_object($theme_info)) {
-            $fields = array(
-				'last_updated'  => esc_html__( 'Last Updated:', 'rudimentary-information'),
-				'version'       => esc_html__( 'Version:', 'rudimentary-information'),
-				'downloaded'    => esc_html__( 'Downloaded:', 'rudimentary-information'),
-            );
-        }
-        
-        $fields = apply_filters('theme_slug_field', $fields);
-        
         ob_start();
         echo $args['before_widget'] . $args['before_title'] . apply_filters('widget_title', $instance['title']) . $args['after_title'];
         ?>
-        <table class="theme-details">
+        <table class="theme-tags">
             <tbody>
-                <?php foreach ($fields as $key => $field) { ?>
+                <?php foreach ($theme_info->tags as $tags) { ?>
                     <tr>
-                        <th><?php echo esc_html($field); ?></th>
-                        
-                        <?php if ('preview_url' === $key || 'homepage' === $key || 'download_link' === $key) { ?>
-                            <?php
-                                switch ($key) {
-									case 'preview_url':
-										$text = $theme_info->name;
-										break;
-									case 'homepage':
-										$text = $theme_info->name;
-										break;
-									case 'download_link':
-										$text = $theme_info->name;
-										break;
-									default:
-										$text = $theme_info->name;
-                                } ?>
-                                <td><a href="<?php echo esc_url($theme_info->$key ); ?>"><?php esc_html_e(apply_filters('theme_slug_link_text', $text, $theme_info, $key)); ?></a></td>
-                        <?php } else if ('downloaded' === $key) {
-                                $downloaded = absint($theme_info->downloaded);
-                                $downloaded_format = number_format($downloaded); ?>
-                                <td><?php echo esc_html($downloaded_format); ?></td> 
-                        <?php } else if ('last_updated' === $key) {
-                                $time = strtotime($theme_info->last_updated);
-                                $format_date = date(get_option('date_format'), $time); ?>
-                                <td><?php echo esc_html($format_date); ?></td> 
-                        <?php } else { ?>
-                            <td><?php echo esc_html( $theme_info->$key ); ?></td>
-                        <?php } ?>
+                        <th><i class="fa fa-check-square" aria-hidden="true"></i></th>
+                        <td><?php echo esc_html($tags); ?></td>
                     </tr>
                 <?php } ?>
             </tbody>
         </table>
         <?php
         echo $args['after_widget'];
-        // get all of the buffered content that we injected/echoed.
         $html = ob_get_clean();
-        // echo the full $html.
         echo $html;
 	}
     

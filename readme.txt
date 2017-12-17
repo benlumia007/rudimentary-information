@@ -4,7 +4,7 @@ Donate link: https://www.benjlu.com
 Tags: api, plugins, themes
 Requires at least: 4.8.3
 Tested up to: 4.9
-Stable tag: 0.0.5
+Stable tag: 0.0.6
 Requires PHP: 7.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -50,7 +50,7 @@ The following fields that are currently supported are as follow:
 * last_updated
 - version
 
-Now supports Meta Box and Widget, an extra feature that you don't need to waste your time with shortcode but shortcodes will be avaiable if you need to grab small information from the API. For this new feature to work properly, you will need to set a theme slug or plugin slug in the Portfolio (Jetpack Portfolio) page. This will save the slug as part of the page and you can use the plugin info widget or theme info widget to display the specific theme. 
+Now supports Meta Box and Widget, an extra feature that you don't need to waste your time with shortcode but shortcodes will be avaiable if you need to grab small information from the API. For this new feature to work properly, you will need to set a theme slug or plugin slug in the Portfolio (Jetpack Portfolio) page. This will save the slug as part of the page and you can use the plugin info widget or theme info widget to display the specific theme. Displays Tags is also supported in its own Widget.
 
 == Installation ==
 
