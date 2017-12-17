@@ -1,7 +1,7 @@
 <?php
 /*
 ================================================================================================
-Rudimentary Information - theme-metabox.php
+Rudimentary Information - theme-meta-box.php
 ================================================================================================
 This holds the main class that can be used to get information about a theme that comes from the
 wordpress.org themes API. It caches calls on a theme by bases.
@@ -18,7 +18,7 @@ wordpress.org themes API. It caches calls on a theme by bases.
 Table of Content
 ================================================================================================
  1.0 - Forbidden Access
- 2.0 - Theme Info Metabox
+ 2.0 - Theme Info Meta Box
 ================================================================================================
 */
 
@@ -33,7 +33,7 @@ if (!defined('ABSPATH')) {
 
 /*
 ================================================================================================
- 2.0 - Theme Info Metabox
+ 2.0 - Theme Info Meta Box
 ================================================================================================
 */
 class Rudimentary_Information_Themes_Meta_Box {

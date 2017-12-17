@@ -46,7 +46,7 @@ class Rudimentary_Information_Themes_Widget extends WP_Widget {
     public function __construct() {
         $widget_options = array(
             'classname' => 'theme_widget',
-            'description' => __('A widget to output theme information if a slug is set through the metabox.', 'rudimentary-information'),
+            'description' => __('A widget to output theme information if a slug is set through the meta box.', 'rudimentary-information'),
         );
         parent::__construct('theme_widget', 'Theme Info', $widget_options);
     }
