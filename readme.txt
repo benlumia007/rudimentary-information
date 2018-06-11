@@ -4,7 +4,7 @@ Donate link: https://www.benjlu.com
 Tags: api, plugins, themes
 Requires at least: 4.8.3
 Tested up to: 4.9
-Stable tag: 0.0.6
+Stable tag: 0.0.8
 Requires PHP: 7.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -75,6 +75,15 @@ To use this plugin simply create a new post or page, and add the following short
 In this new feature, you can use Meta Box and Widget to display your information. The easiest way to do this is to create or modify a page that is under Portfolio, you will then see two new Meta Box for Theme Slug and Plugin Slug, use one or other depending on the current page that you are working on. Once this slug is set, then you can add a widget to the portfolio sidebar to display information automatically. This will only display last updated, version, and how many times the theme or plugin has been downloaded. 
 
 == Changelog ==
+= 0.0.7 = 
+*Add New Widget to support download and preview only*
+
+= 0.0.6 = 
+*Release Date - December 17, 2017*
+
+* Add Widget Support for Themes Tags
+* Bump Version to 0.0.6
+
 = 0.0.5 =
 *Release Date - December 17, 2017*
 

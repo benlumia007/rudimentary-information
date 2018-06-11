@@ -60,3 +60,19 @@ input[type="text"]:focus {
     width: 90%;
 }
 
+.download-preview {
+    padding: 1.125em;
+    text-align: center;
+}
+
+.download-preview-click {
+    background: #3d627d;
+    border-radius: 5px;
+    color: #ffffff;
+    padding: 1.125em;
+    margin: 0 1em;
+}
+
+.download-preview-click:hover {
+    color: #ffffff;
+}

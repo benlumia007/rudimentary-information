@@ -9,7 +9,7 @@ License: GNU General Public License v2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Domain Path: /languages
 Text Domain: rudimentary-information
-Version: 0.0.6
+Version: 0.0.8
 
 Rudimentary Information is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by the Free 
@@ -50,6 +50,7 @@ if (!defined('ABSPATH')) {
  2.0 - Required Files
 ================================================================================================
 */
+require_once(plugin_dir_path(__FILE__) . 'includes/downloads-info.php');
 require_once(plugin_dir_path(__FILE__) . 'includes/theme-info.php');
 require_once(plugin_dir_path(__FILE__) . 'includes/plugin-info.php');
 require_once(plugin_dir_path(__FILE__) . 'includes/theme-meta-box.php');
@@ -74,10 +75,12 @@ add_action('load-post-new.php', 'Rudimentary_Information_Plugins_Meta_Box::init'
 ================================================================================================
 */
 if ($theme_info instanceof Rudimentary_Information_Themes) {
+    require_once(plugin_dir_path(__FILE__) . 'widgets/downloads-widget.php');
     require_once(plugin_dir_path(__FILE__) . 'widgets/theme-widget.php');
     require_once(plugin_dir_path(__FILE__) . 'widgets/tags-widget.php');
     
     function rudimentary_information_theme_info_widget() {
+        register_widget('Rudimentary_Information_Downloads_Widget');
         register_widget('Rudimentary_Information_Themes_Widget');
         register_widget('Rudimentary_Information_Themes_Tags_Widget');
     }
