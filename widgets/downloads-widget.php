@@ -81,7 +81,7 @@ class Rudimentary_Information_Downloads_Widget extends WP_Widget {
             return false;
         }
         
-        $downloads_info = Rudimentary_Information_Downloads::get_theme_info($slug);
+        $downloads_info = Rudimentary_Information_Themes::get_theme_info($slug);
         
         if (is_object($downloads_info)) {
             $fields = array(
